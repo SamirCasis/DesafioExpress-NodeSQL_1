@@ -2,7 +2,7 @@ import pkg from 'pg'
 
 const { Pool } = pkg
 
-const config = {
+const configDB = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
@@ -11,7 +11,7 @@ const config = {
     allowExitOnIdle: true
 }
 
-const poolDB = new Pool(config)
+const poolDB = new Pool(configDB)
 
 const linkDB = (query, values) => poolDB
     .query(query, values)
