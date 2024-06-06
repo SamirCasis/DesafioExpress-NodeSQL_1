@@ -40,7 +40,6 @@ const viewPostId = async (req, res) => {
 const updPostsId = async (req, res) => {
     try {
         const { id, titulo, url, descripcion, likes } = req.body
-        console.log(id, titulo, url, descripcion, likes)
         const post = await updPosts(id, titulo, url, descripcion, likes)
         res.status(200).json({ post: post[0] })
     } catch (error) {
