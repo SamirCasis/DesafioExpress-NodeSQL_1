@@ -1,4 +1,4 @@
-import { postsList, findPosts, addPosts, updPosts, delPosts } from "../models/posts.dao.js"
+import { postsList, findPosts, addPosts, updPosts, updPostsLike, delPosts } from "../models/posts.dao.js"
 
 const viewPost = async (req, res) => {
     try {
@@ -47,6 +47,16 @@ const updPostsId = async (req, res) => {
     }
 }
 
+const updPostsIdLike = async (req, res) => {
+    try {
+        const { id } = req.params
+        const post = await updPostsLike(id)
+        res.status(200).json({ post: post[0] })
+    } catch (error) {
+        res.status(500).json({ message: 'Error al actualizar información' })
+    }
+}
+
 const delPostsid = async (req, res) => {
     try {
         const { id } = req.params
@@ -61,4 +71,4 @@ const errorAll = (_, res) => {
     res.status(404).json({ message: 'Ruta incorrecta' })
 }
 
-export { viewPost, viewPostId, createPost, delPostsid, updPostsId, errorAll }
+export { viewPost, viewPostId, createPost, delPostsid, updPostsId, updPostsIdLike, errorAll }

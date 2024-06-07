@@ -10,6 +10,9 @@ const addPosts = (titulo, url, descripcion) =>
 const updPosts = (id, titulo, url, descripcion, likes) =>
   linkDB('UPDATE posts SET titulo = $2, img = $3, descripcion = $4, likes = $5 WHERE id = $1 RETURNING *;', [id, titulo, url, descripcion, likes])
 
+const updPostsLike = (id) =>
+  linkDB('UPDATE posts SET likes = (likes + 1) WHERE id = $1 RETURNING *;', [id])
+
 const delPosts = (id) => linkDB('DELETE FROM posts WHERE id = $1;', [id])
 
-export { postsList, findPosts, addPosts, updPosts, delPosts }
+export { postsList, findPosts, addPosts, updPosts, updPostsLike, delPosts }
